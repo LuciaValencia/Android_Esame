@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="login_activity" type="id"></item>
+    <item name="alertInput" type="id"></item>
+    <item name="alertInput2" type="id"></item>
+    <item name="c1" type="id"></item>
+    <item name="c2" type="id"></item>
+</resources>

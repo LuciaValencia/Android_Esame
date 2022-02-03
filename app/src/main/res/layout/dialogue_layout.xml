@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.home.LessonFragment">
+
+
+    <!--<EditText
+        android:id="@+id/alertInput"
+        android:layout_width="298dp"
+        android:layout_height="55dp"
+        android:hint="Corso"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<EditText
+        android:id="@+id/alertInput1"
+        android:layout_width="298dp"
+        android:layout_height="55dp"
+        android:hint="Professore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alertInputCourse" />-->
+
+    <RadioGroup
+
+        android:id="@+id/alertInputCourse"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Corsi"/>
+    </RadioGroup>
+   <!-- <RadioGroup
+        android:id="@+id/alertInputProf"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/alertInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </RadioGroup>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

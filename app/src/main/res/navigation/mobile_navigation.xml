@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/loginFragment">
+
+    <fragment
+        android:id="@+id/nav_home_general"
+        android:name="com.example.android_esame.ui.home.HomeFragment"
+        android:label="@string/menu_home_general"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_general_to_nav_lessons"
+            app:destination="@id/nav_lessons" />
+        <!--<action
+            android:id="@+id/action_nav_home_general_to_nav_exams"
+            app:destination="@id/nav_exams" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_lessons"
+        android:name="com.example.android_esame.ui.home.LessonFragment"
+        android:label="@string/menu_lessons"
+        tools:layout="@layout/fragment_lessons" >
+        <!--<action
+            android:id="@+id/action_nav_lessons_to_examsDialogFragment"
+            app:destination="@id/examsDialogFragment" />-->
+    </fragment>
+
+    <!--
+    <fragment
+        android:id="@+id/nav_exams"
+        android:name="com.example.android_esame.ui.home.ExamsFragment"
+        android:label="@string/menu_exams"
+        tools:layout="@layout/fragment_exams" />
+        -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.android_esame.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_sigupFragment"
+            app:destination="@id/sigupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sigupFragment"
+        android:name="com.example.android_esame.SigupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/examsDialogFragment"
+        android:name="com.example.android_esame.ui.home.NOPE_ExamsDialogFragment"
+        android:label="ExamsDialogFragment" />
+</navigation>

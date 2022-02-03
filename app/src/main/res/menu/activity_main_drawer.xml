@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <!--CAMBIARE ICONE-->
+    <group android:checkableBehavior="single">
+        <!--Dashboard/Home-->
+        <item
+            android:id="@+id/nav_home_extra"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home_general" />
+        <!--Lezioni-->
+        <item
+            android:id="@+id/nav_lessons"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_lessons" />
+        <!--Esami-->
+        <!--<item
+            android:id="@+id/nav_exams"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_exams" />-->
+    </group>
+</menu>

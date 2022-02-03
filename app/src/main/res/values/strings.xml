@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Android_Esame</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home_general">Dashboard</string>
+    <string name="menu_lessons">Lezioni</string>
+    <string name="menu_exams">Esami</string>
+    <string name="action_sign_in_as_host">Accedi come ospite</string>
+    <string name="prompt_name">Nome</string>
+    <string name="prompt_surname">Cognome</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Accedi</string>
+    <string name="action_sign_up">Registrati</string>
+    <string name="login_activity">Fai prima il login</string>
+    <string name="home_base_text">Ospite</string>
+    <string name="button_lesson_pren">Vai alle prenotazioni</string>
+    <string name="button_exams_pren">Vedi piano carriera</string>
+    <string name="text_lessons">Lezioni disponibili</string>
+    <string name="text_exams">Appelli disponibili</string>
+</resources>
