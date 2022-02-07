@@ -49,8 +49,4 @@
         android:name="com.example.android_esame.SigupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" />
-    <fragment
-        android:id="@+id/examsDialogFragment"
-        android:name="com.example.android_esame.ui.home.NOPE_ExamsDialogFragment"
-        android:label="ExamsDialogFragment" />
 </navigation>
