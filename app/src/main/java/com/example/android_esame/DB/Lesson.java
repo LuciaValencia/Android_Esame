@@ -5,11 +5,12 @@ import com.example.android_esame.ui.CardSettings.Courses;
 import com.example.android_esame.ui.CardSettings.Professor;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Lesson {
     public Professor prof, prof2;
     public Courses course;
-    //public DatePicker;
+    public Date date;
     public UserViewModel model;
     public boolean piuProf = true;
     //protected ArrayList<Professor> profArray = new ArrayList();
@@ -49,7 +50,6 @@ public class Lesson {
         return profArray;
     }
 
-
     public void setArrayCourses() {
         this.getProfArray();
         courseArray = new Courses[10];
@@ -81,6 +81,25 @@ public class Lesson {
     public Courses[] getCourseArray() {
         setArrayCourses();
         return courseArray;
+    }
+
+    public String getCourseArrayToString() {
+        setArrayCourses();
+        String t="";
+        for(int i=0;i<courseArray.length;i++){
+           t=this.courseArray[i].getTitleCourse();
+            t+=" di "+String.valueOf(this.courseArray[i].getProfessors());
+        }
+        return t;
+    }
+
+    public String getProfessorToString() {
+        setArrayCourses();
+        String t="";
+        for(int i=0;i<courseArray.length;i++){
+            t=this.courseArray[i].getCardProfessorsToString();
+        }
+        return t;
     }
 
     public Lesson(UserViewModel model/*, Courses course, Professor prof*/) {

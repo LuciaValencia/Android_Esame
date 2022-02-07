@@ -29,32 +29,6 @@ import com.example.android_esame.ui.CardSettings.ShadowTransformer;
 
 public class LessonFragment extends AppCompatActivity {
 
-    //DbHelper dbHelper = new DbHelper(this); //NON LO SOOOOOOOOO
-
-    //professori: da inserire poi in un DB
-    Professor goy = new Professor("Annamaria", "Goy");
-    Professor segnan = new Professor("Marino", "Segnan");
-    Professor rapp = new Professor("Amon", "Rapp");
-    Professor console = new Professor("Luca", "Console");
-    Professor cogo = new Professor("Enrico", "Cogo");
-    Professor patrucco = new Professor("XXX", "Patrucco");
-    Professor gena = new Professor("Cristina", "Gena");
-    Professor cena = new Professor("Federica", "Cena");
-    Professor tipaldo = new Professor("Giuseppe", "Tipaldo");
-    Professor vernero = new Professor("Fabiana", "Cernero");
-
-    //corsi: da inserire poi in un DB
-    /*Courses c1 = new Courses("Programmazione Web: approcci avanzati", goy);
-    Courses c2 = new Courses("Programmazione mobile: Android", segnan);
-    Courses c3 = new Courses("Intelligenza Artificiale", console, rapp);
-    Courses c4 = new Courses("Laboratorio nuove tendenze delle ICT", goy);
-    Courses c5 = new Courses("Interazione Uomo-Macchina: approcci avanzati", gena);
-    Courses c6 = new Courses("Programmazione avanzata: Python e Arduino", console, segnan);
-    Courses c7 = new Courses("Diritto delle ICT e dei media", cogo);
-    Courses c8 = new Courses("Economia di Internet", patrucco);
-    Courses c9 = new Courses("Metodi digitali per la ricerca sociale", tipaldo);
-    Courses c10 = new Courses("Web of Open and Secure Data", cena, vernero);
-     */
     private UserViewModel model;
     private ViewPager mViewPager;
     private CardPagerAdapter mCardPagerAdapter; //creo classe CardPagerAdapter e Courses
@@ -107,14 +81,21 @@ public class LessonFragment extends AppCompatActivity {
                 String textAdded = "";
 
 
-                for (int n = 0; n < mCardPagerAdapter.getCount(); n++) {
+                //for (int n = 0; n < mCardPagerAdapter.getCount(); n++) {
                     //int idRis = mCardPagerAdapter.getCardItemInPosition(n).getIdItem();
 
-                    String titolo = mCardPagerAdapter.getCardItemInPosition(n).getTitleCourse();
-                    String text = mCardPagerAdapter.getCardItemInPosition(n).getCardProfessorsToString();
+//                    String titolo = mCardPagerAdapter.getCardItemInPosition(n).getTitleCourse();
+//                    String text = mCardPagerAdapter.getCardItemInPosition(n).getCardProfessorsToString();
+//
+//                    textAdded += (n + 1) + ") Corso: " + titolo + " di " + text + ".\n\n";
+                //}
+                for (int n=0; n<corsi.length; n++){
+                    Professor profDelCorso=corsi[n].getProfessors();
+                    textAdded+=corsi[n].getTitleCourse()+"\n";
+                    textAdded+=profDelCorso.getName();
 
-                    textAdded += (n + 1) + ") Corso: " + titolo + " di " + text + ".\n\n";
                 }
+
                 c.setText(textAdded);
             }
         });

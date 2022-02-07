@@ -1,12 +1,10 @@
 package com.example.android_esame.ui.CardSettings;
 
 
-import android.util.Log;
-
 public class Courses {
 
 
-    private String cardProfessor;
+   // private String cardProfessor;
     private Professor cardP, cardP2;
     private String cardCourse;
     private int idCard;
@@ -50,12 +48,20 @@ public class Courses {
     }
 
     public String getCardProfessorsToString() {
-        String t="";
+        /*String t="";
         if(piuProf) {
             t= cardP.readProfToString()+" e " + cardP2.readProfToString();
             Log.e("getCardProfessorsToString()", t+cardP2.readProfToString());
         }else if (!piuProf){t = cardP.readProfToString();}
         return t;
+         */
+        String t="";
+        t=cardP.readProfToString();
+        return t;
+    }
+
+    public Professor getProfessors() {
+        return cardP;
     }
 
     public String getTitleCourse() {
