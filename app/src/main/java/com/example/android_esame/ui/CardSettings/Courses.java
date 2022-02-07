@@ -1,6 +1,8 @@
 package com.example.android_esame.ui.CardSettings;
 
 
+import android.util.Log;
+
 public class Courses {
 
 
@@ -33,28 +35,27 @@ public class Courses {
 
 
     public Object getCourseProfessors() {
-
-        if(!piuProf){
+        /*if(!piuProf){
             return cardP.readProf();
         }
-        else if (piuProf){
+        else*/
+        if (piuProf){
             Professor[] piuProfArray=new Professor[2];
             piuProfArray[0]=cardP.readProf();
             piuProfArray[1]= cardP2.readProf();
 
             return piuProfArray;
         }
-        return null;
+        return cardP.readProf();
     }
 
     public String getCardProfessorsToString() {
-        if (!piuProf){
-        return cardP.readProfToString();
-        }
-        else if(piuProf) {
-            return cardP.readProfToString()+" e "+cardP2.readProfToString();
-        }
-        return null;
+        String t="";
+        if(piuProf) {
+            t= cardP.readProfToString()+" e " + cardP2.readProfToString();
+            Log.e("getCardProfessorsToString()", t+cardP2.readProfToString());
+        }else if (!piuProf){t = cardP.readProfToString();}
+        return t;
     }
 
     public String getTitleCourse() {

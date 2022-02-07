@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.android_esame.DB.Lesson;
 import com.example.android_esame.R;
 import com.example.android_esame.livedata.CourseLiveData;
 import com.example.android_esame.livedata.UserViewModel;
@@ -43,7 +44,7 @@ public class LessonFragment extends AppCompatActivity {
     Professor vernero = new Professor("Fabiana", "Cernero");
 
     //corsi: da inserire poi in un DB
-    Courses c1 = new Courses("Programmazione Web: approcci avanzati", goy);
+    /*Courses c1 = new Courses("Programmazione Web: approcci avanzati", goy);
     Courses c2 = new Courses("Programmazione mobile: Android", segnan);
     Courses c3 = new Courses("Intelligenza Artificiale", console, rapp);
     Courses c4 = new Courses("Laboratorio nuove tendenze delle ICT", goy);
@@ -53,7 +54,7 @@ public class LessonFragment extends AppCompatActivity {
     Courses c8 = new Courses("Economia di Internet", patrucco);
     Courses c9 = new Courses("Metodi digitali per la ricerca sociale", tipaldo);
     Courses c10 = new Courses("Web of Open and Secure Data", cena, vernero);
-
+     */
     private UserViewModel model;
     private ViewPager mViewPager;
     private CardPagerAdapter mCardPagerAdapter; //creo classe CardPagerAdapter e Courses
@@ -61,6 +62,10 @@ public class LessonFragment extends AppCompatActivity {
     private ShadowTransformer mFragmentCardShadowTransformer, mCardShadowTransformer;
     CalendarView calendarView;
     private CourseLiveData data;
+
+    public Lesson lesson = new Lesson(model);
+    Courses[] corsi = lesson.getCourseArray();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,8 @@ public class LessonFragment extends AppCompatActivity {
                 mCardPagerAdapter.addCardItem(ite);
             }
         });
+
+        lesson.getProfArray();
 
         setContentView(R.layout.fragment_lessons);
 
@@ -118,9 +125,11 @@ public class LessonFragment extends AppCompatActivity {
         mCardPagerAdapter = new CardPagerAdapter();
         int i = 0;
 
-        mCardPagerAdapter.addCardItem(c1);
-        mCardPagerAdapter.addCardItem(c2);
-        mCardPagerAdapter.addCardItem(c3);
+        mCardPagerAdapter.addCardItem(corsi[0]);
+        mCardPagerAdapter.addCardItem(corsi[1]);
+        mCardPagerAdapter.addCardItem(corsi[2]);
+        //mCardPagerAdapter.addCardItem(c2);
+        //mCardPagerAdapter.addCardItem(c3);
 
 
         /**-------------------* NON MODIFICARE DA QUI *------------------------*/
@@ -161,13 +170,13 @@ public class LessonFragment extends AppCompatActivity {
         RadioButton rbC6 = new RadioButton(customLayout.getContext());
         RadioButton rbC7 = new RadioButton(customLayout.getContext());
 
-        rbC1.setText(c4.getTitleCourse());
-        rbC2.setText(c5.getTitleCourse());
-        rbC3.setText(c6.getTitleCourse());
-        rbC4.setText(c7.getTitleCourse());
-        rbC5.setText(c8.getTitleCourse());
-        rbC6.setText(c9.getTitleCourse());
-        rbC7.setText(c10.getTitleCourse());
+        rbC1.setText(corsi[3].getTitleCourse());
+        rbC2.setText(corsi[4].getTitleCourse());
+        rbC3.setText(corsi[5].getTitleCourse());
+        rbC4.setText(corsi[6].getTitleCourse());
+        rbC5.setText(corsi[7].getTitleCourse());
+        rbC6.setText(corsi[8].getTitleCourse());
+        rbC7.setText(corsi[9].getTitleCourse());
 
         course.addView(rbC1);
         course.addView(rbC2);
@@ -186,20 +195,20 @@ public class LessonFragment extends AppCompatActivity {
                 String rb1 = rb.getText().toString();
                 Object pP = null;
 
-                if (rb1 == c4.getTitleCourse()) {
-                    pP = c4.getCourseProfessors();
-                } else if (rb1 == c5.getTitleCourse()) {
-                    pP = c5.getCourseProfessors();
-                } else if (rb1 == c6.getTitleCourse()) {
-                    pP = c6.getCourseProfessors();
-                } else if (rb1 == c7.getTitleCourse()) {
-                    pP = c7.getCourseProfessors();
-                } else if (rb1 == c8.getTitleCourse()) {
-                    pP = c8.getCourseProfessors();
-                } else if (rb1 == c9.getTitleCourse()) {
-                    pP = c9.getCourseProfessors();
-                } else if (rb1 == c10.getTitleCourse()) {
-                    pP = c10.getCourseProfessors();
+                if (rb1 == corsi[3].getTitleCourse()) {
+                    pP = corsi[3].getCourseProfessors();
+                } else if (rb1 == corsi[4].getTitleCourse()) {
+                    pP = corsi[4].getCourseProfessors();
+                } else if (rb1 == corsi[5].getTitleCourse()) {
+                    pP = corsi[5].getCourseProfessors();
+                } else if (rb1 == corsi[6].getTitleCourse()) {
+                    pP = corsi[6].getCourseProfessors();
+                } else if (rb1 == corsi[7].getTitleCourse()) {
+                    pP = corsi[7].getCourseProfessors();
+                } else if (rb1 == corsi[8].getTitleCourse()) {
+                    pP = corsi[8].getCourseProfessors();
+                } else if (rb1 == corsi[9].getTitleCourse()) {
+                    pP = corsi[9].getCourseProfessors();
                 }
                 sendDialogDataToActivity(rb1, pP);
             }
@@ -260,16 +269,16 @@ public class LessonFragment extends AppCompatActivity {
         RadioButton rbC9 = new RadioButton(customLayout.getContext());
         RadioButton rbC10 = new RadioButton(customLayout.getContext());
 
-        rbC1.setText(c1.getTitleCourse());
-        rbC2.setText(c2.getTitleCourse());
-        rbC3.setText(c3.getTitleCourse());
-        rbC4.setText(c4.getTitleCourse());
-        rbC5.setText(c5.getTitleCourse());
-        rbC6.setText(c6.getTitleCourse());
-        rbC7.setText(c7.getTitleCourse());
-        rbC8.setText(c8.getTitleCourse());
-        rbC9.setText(c9.getTitleCourse());
-        rbC10.setText(c10.getTitleCourse());
+        rbC1.setText(corsi[0].getTitleCourse());
+        rbC2.setText(corsi[1].getTitleCourse());
+        rbC3.setText(corsi[2].getTitleCourse());
+        rbC4.setText(corsi[3].getTitleCourse());
+        rbC5.setText(corsi[4].getTitleCourse());
+        rbC6.setText(corsi[5].getTitleCourse());
+        rbC7.setText(corsi[6].getTitleCourse());
+        rbC8.setText(corsi[7].getTitleCourse());
+        rbC9.setText(corsi[8].getTitleCourse());
+        rbC10.setText(corsi[9].getTitleCourse());
 
         course.addView(rbC1);
         course.addView(rbC2);
