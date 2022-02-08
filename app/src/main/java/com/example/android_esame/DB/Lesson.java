@@ -36,13 +36,13 @@ public class Lesson {
         profArray[0] = goy;
         profArray[1] = segnan;
         profArray[2] = rapp;
-        profArray[4] = console;
-        profArray[5] = cogo;
-        profArray[6] = patrucco;
-        profArray[7] = gena;
-        profArray[8] = cena;
-        profArray[9] = tipaldo;
-        profArray[10] = vernero;
+        profArray[3] = console;
+        profArray[4] = cogo;
+        profArray[5] = patrucco;
+        profArray[6] = gena;
+        profArray[7] = cena;
+        profArray[8] = tipaldo;
+        profArray[9] = vernero;
     }
 
     public Professor[] getProfArray() {
@@ -56,7 +56,7 @@ public class Lesson {
 
         Courses c1 = new Courses("Programmazione Web: approcci avanzati", profArray[0]);
         Courses c2 = new Courses("Programmazione mobile: Android", profArray[1]);
-        Courses c3 = new Courses("Intelligenza Artificiale", profArray[2]);//, profArray[3]);
+        Courses c3 = new Courses("Intelligenza Artificiale", profArray[3]);//, profArray[2]);
         Courses c4 = new Courses("Laboratorio nuove tendenze delle ICT", profArray[0]);
         Courses c5 = new Courses("Interazione Uomo-Macchina: approcci avanzati", profArray[6]);
         Courses c6 = new Courses("Programmazione avanzata: Python e Arduino", profArray[3]);//, profArray[1]);
@@ -81,16 +81,6 @@ public class Lesson {
     public Courses[] getCourseArray() {
         setArrayCourses();
         return courseArray;
-    }
-
-    public String getCourseArrayToString() {
-        setArrayCourses();
-        String t="";
-        for(int i=0;i<courseArray.length;i++){
-           t=this.courseArray[i].getTitleCourse();
-            t+=" di "+String.valueOf(this.courseArray[i].getProfessors());
-        }
-        return t;
     }
 
     public String getProfessorToString() {

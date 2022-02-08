@@ -24,7 +24,6 @@ import com.example.android_esame.livedata.UserViewModel;
 import com.example.android_esame.ui.CardSettings.CardFragmentPagerAdapter;
 import com.example.android_esame.ui.CardSettings.CardPagerAdapter;
 import com.example.android_esame.ui.CardSettings.Courses;
-import com.example.android_esame.ui.CardSettings.Professor;
 import com.example.android_esame.ui.CardSettings.ShadowTransformer;
 
 public class LessonFragment extends AppCompatActivity {
@@ -68,37 +67,7 @@ public class LessonFragment extends AppCompatActivity {
 
         setContentView(R.layout.fragment_lessons);
 
-        calendarView = findViewById(R.id.calendarView2);
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                TextView t = findViewById(R.id.titolo);
-                i1++;
-                t.setText("Lezioni del " + i2 + "/" + i1 + "/" + i);
-
-                TextView c = findViewById(R.id.contenuto);
-                String textAdded = "";
-
-
-                //for (int n = 0; n < mCardPagerAdapter.getCount(); n++) {
-                    //int idRis = mCardPagerAdapter.getCardItemInPosition(n).getIdItem();
-
-//                    String titolo = mCardPagerAdapter.getCardItemInPosition(n).getTitleCourse();
-//                    String text = mCardPagerAdapter.getCardItemInPosition(n).getCardProfessorsToString();
-//
-//                    textAdded += (n + 1) + ") Corso: " + titolo + " di " + text + ".\n\n";
-                //}
-                for (int n=0; n<corsi.length; n++){
-                    Professor profDelCorso=corsi[n].getProfessors();
-                    textAdded+=corsi[n].getTitleCourse()+"\n";
-                    textAdded+=profDelCorso.getName();
-
-                }
-
-                c.setText(textAdded);
-            }
-        });
 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -128,6 +97,35 @@ public class LessonFragment extends AppCompatActivity {
         mViewPager.setOffscreenPageLimit(3);
 
         /**-------------------* NON MODIFICARE FINO A QUI *------------------------*/
+
+        calendarView = findViewById(R.id.calendarView2);
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                TextView t = findViewById(R.id.titolo);
+                i1++;
+                t.setText("Lezioni del " + i2 + "/" + i1 + "/" + i);
+
+                TextView c = findViewById(R.id.contenuto);
+                String textAdded = "";
+                for(int n=0; n <mCardPagerAdapter.getCount();n++){
+                    textAdded+=corsi[n].getTitleCourse()+"\n";
+
+                }
+                //for (int n=0; n<corsi.length; n++){
+                    //Professor profDelCorso=corsi[n].getProfessors();
+                    //textAdded+=corsi[n].getTitleCourse()+"\n";
+                    //textAdded+=profDelCorso.readProfToString();
+                    //textAdded+=corsi[n].getCourseProfessors();
+
+                //}
+
+                c.setText(textAdded);
+                //Button btLez=new Button();
+                // btLez.setText("Prenotati");
+            }
+        });
     }
 
 
