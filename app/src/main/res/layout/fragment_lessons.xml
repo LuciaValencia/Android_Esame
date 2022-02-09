@@ -3,15 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.home.LessonFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/half"
@@ -43,7 +40,6 @@
             android:id="@+id/botton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
             android:onClick="addLessons"
             android:text="Inserisci nuovo corso"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,11 +49,11 @@
 
         </Button>
 
+        <!--android:layout_marginTop="44dp"-->
         <Button
             android:id="@+id/botton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
             android:onClick="deleteLessons"
             android:text="cancella prenotazione"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,55 +61,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/botton1"></Button>
 
+        <!--android:layout_marginTop="44dp"-->
         <CalendarView
             android:id="@+id/calendarView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
             android:firstDayOfWeek="2"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/botton2" />
 
         <TextView
             android:id="@+id/titolo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="25dp"
-            android:text=""
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/calendarView2" />
 
-        <!--<TextView
-            android:id="@+id/contenuto"
+        <FrameLayout
             android:layout_width="wrap_content"
+            android:padding="5dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
-            android:isScrollContainer="true"
-            android:padding="15dp"
-            android:text=""
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titolo" />-->
+            app:layout_constraintTop_toBottomOf="@id/titolo">
 
-        <!-- Adapters/StringListFragment: layout: fragment_string_list-->
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintTop_toBottomOf="@id/titolo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="15dp"
-            />
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
+        </FrameLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

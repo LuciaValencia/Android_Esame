@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
@@ -71,13 +70,14 @@ public class LessonFragment extends AppCompatActivity {
         lesson.getProfArray();
 
         setContentView(R.layout.fragment_lessons);
+        calendarView = findViewById(R.id.calendarView2);
 
         /**-------------------* NON MODIFICARE DA QUI *------------------------*/
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         //card lezioni
         mCardPagerAdapter = new CardPagerAdapter();
-        int i = 0;
+        //int i = 0;
 
         mCardPagerAdapter.addCardItem(corsi[0]);
         mCardPagerAdapter.addCardItem(corsi[1]);
@@ -96,7 +96,6 @@ public class LessonFragment extends AppCompatActivity {
 
         /**-------------------* NON MODIFICARE FINO A QUI *------------------------*/
 
-        calendarView = findViewById(R.id.calendarView2);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -114,14 +113,19 @@ public class LessonFragment extends AppCompatActivity {
 
                 for(int n=0; n <mCardPagerAdapter.getCount();n++){
                     //arr.add("Item "+ corsi[n].getTitleCourse()+"\n"); //manca: corsi del "professor"
-                    textAdded=corsi[n].getTitleCourse()+"\n"; //manca: corsi del "professor"
-                    arr.add(textAdded+n);
+                    //if(lesson.getCourseArray()[n].getTitleCourse()==mCardPagerAdapter.getCardItemInPosition(n)){
+                        //textAdded=corsi[n].getTitleCourse();
+                    //};
+                    int j=n+1;
+                    textAdded="Corso "+j+": "+mCardPagerAdapter.getCardItemInPosition(n).getTitleCourse()+" di "+mCardPagerAdapter.getCardItemInPosition(n).getCardProfessorsToString();
+                    arr.add("\n"+textAdded+"\n");
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, arr);
+
+                //first parameter: getApplicationContext()oppure getBaseContext()
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(LessonFragment.this, android.R.layout.simple_list_item_1, android.R.id.text1, arr);
 
                 listView.setAdapter(adapter);
 
-                /**TO DO : capire come risolvere la listview in base al file del prof*/
 
                 /** da rivedere in seguito: per ora non serve
                  * listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -316,14 +320,3 @@ public class LessonFragment extends AppCompatActivity {
         dialog.show();
     }
 }
-
-
-
-
-
-
-
-/**
- * TO DO
- * l'aggiunta delle card deve appartenere all'UserModel per gli utenti scritti NEIN
- */
