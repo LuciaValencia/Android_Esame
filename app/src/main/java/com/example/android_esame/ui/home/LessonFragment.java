@@ -78,7 +78,6 @@ public class LessonFragment extends AppCompatActivity {
 
         //card lezioni
         mCardPagerAdapter = new CardPagerAdapter();
-        //int i = 0;
 
         mCardPagerAdapter.addCardItem(corsi[0]);
         mCardPagerAdapter.addCardItem(corsi[1]);
@@ -95,14 +94,13 @@ public class LessonFragment extends AppCompatActivity {
         mViewPager.setPageTransformer(false, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);
 
-        /**-------------------* NON MODIFICARE FINO A QUI *------------------------*/
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
 
                 TextView t = findViewById(R.id.titolo);
                 TextView s = findViewById(R.id.subtitle);
+
                 i1++;
                 t.setText("Lezioni del " + i2 + "/" + i1 + "/" + i);
                 s.setText("clicca sul corso per vedere quando si terranno le lezioni");
@@ -125,42 +123,39 @@ public class LessonFragment extends AppCompatActivity {
                 listView.setAdapter(adapter);
 
 
-                /**DA RIVEDERE TUTTO IL LISTENER*/
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
                         Courses item = (Courses) cA.get(position);
-                        Courses[] coursesArray=lesson.getCourseArray();
+                        Courses[] coursesArray = lesson.getCourseArray();
 
-                        String itemValue="";
+                        TextView o = findViewById(R.id.orario);
 
-                        for (int k=0;k<coursesArray.length;k++){
-                            if(position==k){
-                                //itemValue=item.getTitleCourse();
-                                itemValue=coursesArray[k].getTitleCourse();
+                        String itemValue = "";
+                        String orario = "";
+                        String text = "ORARIO";
+
+                        for (int k = 0; k < coursesArray.length; k++) {
+                            if (position == k) {
+                                itemValue = coursesArray[k].getTitleCourse();
+                                text += " di " + itemValue;
+                                for (int l = 0; l < coursesArray[k].getOrario().size(); l++) {
+                                    orario = coursesArray[k].getOrario().get(l);
+                                    text += "\n - " + orario;
+                                }
                             }
                         }
+                        o.setText(text);
 
-                        position++;
-
-                        Toast.makeText(LessonFragment.this, "Corso: " + itemValue, Toast.LENGTH_LONG)
+                        Toast.makeText(LessonFragment.this, "Scorri verso l'alto per vedere gli orari", Toast.LENGTH_SHORT)
                                 .show();
-
-
-
                     }
-
                 });
-
             }
         });
     }
 
-
-    /**
-     * DEFINITIVO
-     */
     public void addLessons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scegli il corso da aggiungere");
@@ -228,9 +223,6 @@ public class LessonFragment extends AppCompatActivity {
         dialog.show();
     }
 
-    /**
-     * DEFINITIVO
-     */
     // Do something with the data coming from the AlertDialog
     private void sendDialogDataToActivity(String course, Object professor) {
 
@@ -255,9 +247,6 @@ public class LessonFragment extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * DEFINITIVO
-     */
     public void deleteLessons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scegli il corso da togliere");
@@ -306,10 +295,8 @@ public class LessonFragment extends AppCompatActivity {
                 //RadioButton rb = course.findViewById(selectedId-1);
 
                 if (selectedId - 1 <= mCardPagerAdapter.getCount()) {
-                    //Courses course = mCardPagerAdapter.getCardItemInPosition(selectedId-1);
                     CardView cardView = mCardPagerAdapter.getView(selectedId - 1);
                     mCardPagerAdapter.destroyItem(mViewPager, selectedId - 1, cardView);
-                    //mCardPagerAdapter.getCardItemInPosition(selectedId-1);
                 } else {
                     if (selectedId >= 11 && selectedId <= 20) {
                         selectedId = selectedId - 10;

@@ -20,6 +20,8 @@ public class UserViewModel extends Application {
     private CardPagerAdapter cpa;
 
 
+
+
     /**-----------------* DA QUI NON MOFIFICARE NULLA *----------------------*/
     void setUsername(String username) {
         this.username = username;

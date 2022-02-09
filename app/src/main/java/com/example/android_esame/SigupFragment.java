@@ -30,7 +30,6 @@ public class SigupFragment extends Fragment {
 
     }
 
-
     //in modo da poter modificare la pagina una volta che questa viene creata
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

@@ -1,6 +1,8 @@
 package com.example.android_esame.ui.CardSettings;
 
 
+import java.util.ArrayList;
+
 public class Courses {
 
 
@@ -9,6 +11,11 @@ public class Courses {
     private String cardCourse;
     private int idCard;
     boolean piuProf =true;
+
+    private String dataSingola;
+    private String oraInizio;
+    private String oraFine;
+    private ArrayList<String> dateMultiple=new ArrayList();
 
 
     public Courses(String subject, Professor prof /*, int id*/) {
@@ -77,4 +84,14 @@ public class Courses {
         this.getTitleCourse();
     }
 
+    public void setOrario(String giornoDellaSettimana, int hI, int mI, int hF, int mF) {
+        this.dataSingola=giornoDellaSettimana;
+        this.oraInizio=hI+":"+mI;
+        this.oraFine=hF+":"+mF;
+        dateMultiple.add(dataSingola+" dalle "+oraInizio+"0 alle "+oraFine+"0");
+    }
+
+    public ArrayList<String> getOrario() {
+        return this.dateMultiple;
+    }
 }

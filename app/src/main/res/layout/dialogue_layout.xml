@@ -8,25 +8,6 @@
     tools:context=".ui.home.LessonFragment">
 
 
-    <!--<EditText
-        android:id="@+id/alertInput"
-        android:layout_width="298dp"
-        android:layout_height="55dp"
-        android:hint="Corso"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--<EditText
-        android:id="@+id/alertInput1"
-        android:layout_width="298dp"
-        android:layout_height="55dp"
-        android:hint="Professore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertInputCourse" />-->
-
     <RadioGroup
 
         android:id="@+id/alertInputCourse"

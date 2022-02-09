@@ -97,10 +97,7 @@ public class MainActivity extends AppCompatActivity {
         } else if(id==R.id.nav_lessons){
             openLessons();
             return true;
-        } /*else if(id==R.id.nav_exams){
-            //per la Dashboard
-            //fragment=new login(); //logimn è una funzione!!!
-        }*/
+        }
 
         if(fragment != null){
             FragmentManager fragmentManager=getSupportFragmentManager();
@@ -109,10 +106,6 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(R.id.nav_host_fragment,fragment);
             ft.commit();
         }
-
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
