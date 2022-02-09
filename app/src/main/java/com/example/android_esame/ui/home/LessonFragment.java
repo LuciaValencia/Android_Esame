@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
@@ -96,63 +97,73 @@ public class LessonFragment extends AppCompatActivity {
 
         /**-------------------* NON MODIFICARE FINO A QUI *------------------------*/
 
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
 
                 TextView t = findViewById(R.id.titolo);
+                TextView s = findViewById(R.id.subtitle);
                 i1++;
                 t.setText("Lezioni del " + i2 + "/" + i1 + "/" + i);
+                s.setText("clicca sul corso per vedere quando si terranno le lezioni");
 
-                //TextView c = findViewById(R.id.contenuto);
                 String textAdded = "";
                 ListView listView = findViewById(R.id.list);
 
                 ArrayList<String> arr = new ArrayList();
+                ArrayList<Courses> cA = new ArrayList();
 
-                for(int n=0; n <mCardPagerAdapter.getCount();n++){
-                    //arr.add("Item "+ corsi[n].getTitleCourse()+"\n"); //manca: corsi del "professor"
-                    //if(lesson.getCourseArray()[n].getTitleCourse()==mCardPagerAdapter.getCardItemInPosition(n)){
-                        //textAdded=corsi[n].getTitleCourse();
-                    //};
-                    int j=n+1;
-                    textAdded="Corso "+j+": "+mCardPagerAdapter.getCardItemInPosition(n).getTitleCourse()+" di "+mCardPagerAdapter.getCardItemInPosition(n).getCardProfessorsToString();
-                    arr.add("\n"+textAdded+"\n");
+                for (int n = 0; n < mCardPagerAdapter.getCount(); n++) {
+                    int j = n + 1;
+                    Courses course = mCardPagerAdapter.getCardItemInPosition(n);
+                    textAdded = "Corso " + j + ": " + course.getTitleCourse() + " di " + course.getCardProfessorsToString();
+                    arr.add("\n" + textAdded + "\n");
+                    cA.add(course);
                 }
 
-                //first parameter: getApplicationContext()oppure getBaseContext()
+                //ArrayAdapter<Courses> coursesArrayAdapter=new ArrayAdapter<Courses>(LessonFragment.this, android.R.layout.simple_list_item_1,android.R.id.text1,cA);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(LessonFragment.this, android.R.layout.simple_list_item_1, android.R.id.text1, arr);
-
                 listView.setAdapter(adapter);
+                //listView.setAdapter(coursesArrayAdapter);
 
 
-                /** da rivedere in seguito: per ora non serve
-                 * listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+                /**DA RIVEDERE TUTTO IL LISTENER*/
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-                        String itemValue = (String) listView.getItemAtPosition(position);
-                        Courses item= (Courses) listView.getItemAtPosition(position);
-                        itemValue=item.getTitleCourse();
+                        Courses item = (Courses) cA.get(position);
+                        Courses[] coursesArray=lesson.getCourseArray();
+
+                        String itemValue="";
+                            for(int k=0; k < coursesArray.length; k++){
+                                if(coursesArray[k].equals(item)){
+                                    itemValue = item.getTitleCourse() + " "+item.getCardProfessorsToString();
+                                  //itemValue = coursesArray[k].getTitleCourse() + " "+coursesArray[k].getCardProfessorsToString();
+
+                                }else{itemValue =item.getTitleCourse();}
+                            }
+
+
                         position++;
-                        Toast.makeText(LessonFragment.this,
-                                "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+
+                        Toast.makeText(LessonFragment.this, "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
                                 .show();
+
+
+
                     }
 
                 });
-                 */
-
-                //.setText(textAdded);
 
             }
         });
     }
 
 
-    /** DEFINITIVO */
+    /**
+     * DEFINITIVO
+     */
     public void addLessons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scegli il corso da aggiungere");
@@ -161,30 +172,30 @@ public class LessonFragment extends AppCompatActivity {
 
         builder.setView(customLayout);
 
-                RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
-                RadioButton rbC1 = new RadioButton(customLayout.getContext());
-                RadioButton rbC2 = new RadioButton(customLayout.getContext());
-                RadioButton rbC3 = new RadioButton(customLayout.getContext());
-                RadioButton rbC4 = new RadioButton(customLayout.getContext());
-                RadioButton rbC5 = new RadioButton(customLayout.getContext());
-                RadioButton rbC6 = new RadioButton(customLayout.getContext());
-                RadioButton rbC7 = new RadioButton(customLayout.getContext());
+        RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
+        RadioButton rbC1 = new RadioButton(customLayout.getContext());
+        RadioButton rbC2 = new RadioButton(customLayout.getContext());
+        RadioButton rbC3 = new RadioButton(customLayout.getContext());
+        RadioButton rbC4 = new RadioButton(customLayout.getContext());
+        RadioButton rbC5 = new RadioButton(customLayout.getContext());
+        RadioButton rbC6 = new RadioButton(customLayout.getContext());
+        RadioButton rbC7 = new RadioButton(customLayout.getContext());
 
-                rbC1.setText(corsi[3].getTitleCourse());
-                rbC2.setText(corsi[4].getTitleCourse());
-                rbC3.setText(corsi[5].getTitleCourse());
-                rbC4.setText(corsi[6].getTitleCourse());
-                rbC5.setText(corsi[7].getTitleCourse());
-                rbC6.setText(corsi[8].getTitleCourse());
-                rbC7.setText(corsi[9].getTitleCourse());
+        rbC1.setText(corsi[3].getTitleCourse());
+        rbC2.setText(corsi[4].getTitleCourse());
+        rbC3.setText(corsi[5].getTitleCourse());
+        rbC4.setText(corsi[6].getTitleCourse());
+        rbC5.setText(corsi[7].getTitleCourse());
+        rbC6.setText(corsi[8].getTitleCourse());
+        rbC7.setText(corsi[9].getTitleCourse());
 
-                course.addView(rbC1);
-                course.addView(rbC2);
-                course.addView(rbC3);
-                course.addView(rbC4);
-                course.addView(rbC5);
-                course.addView(rbC6);
-                course.addView(rbC7);
+        course.addView(rbC1);
+        course.addView(rbC2);
+        course.addView(rbC3);
+        course.addView(rbC4);
+        course.addView(rbC5);
+        course.addView(rbC6);
+        course.addView(rbC7);
 
         builder.setPositiveButton("Fatto", new DialogInterface.OnClickListener() {
             @Override
@@ -220,7 +231,9 @@ public class LessonFragment extends AppCompatActivity {
         dialog.show();
     }
 
-    /** DEFINITIVO */
+    /**
+     * DEFINITIVO
+     */
     // Do something with the data coming from the AlertDialog
     private void sendDialogDataToActivity(String course, Object professor) {
 
@@ -245,7 +258,9 @@ public class LessonFragment extends AppCompatActivity {
                 .show();
     }
 
-    /** DEFINITIVO */
+    /**
+     * DEFINITIVO
+     */
     public void deleteLessons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scegli il corso da togliere");
@@ -253,39 +268,39 @@ public class LessonFragment extends AppCompatActivity {
         final View customLayout = getLayoutInflater().inflate(R.layout.dialogue_layout, null);
         builder.setView(customLayout);
 
-                RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
-                RadioButton rbC1 = new RadioButton(customLayout.getContext());
-                RadioButton rbC2 = new RadioButton(customLayout.getContext());
-                RadioButton rbC3 = new RadioButton(customLayout.getContext());
-                RadioButton rbC4 = new RadioButton(customLayout.getContext());
-                RadioButton rbC5 = new RadioButton(customLayout.getContext());
-                RadioButton rbC6 = new RadioButton(customLayout.getContext());
-                RadioButton rbC7 = new RadioButton(customLayout.getContext());
-                RadioButton rbC8 = new RadioButton(customLayout.getContext());
-                RadioButton rbC9 = new RadioButton(customLayout.getContext());
-                RadioButton rbC10 = new RadioButton(customLayout.getContext());
+        RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
+        RadioButton rbC1 = new RadioButton(customLayout.getContext());
+        RadioButton rbC2 = new RadioButton(customLayout.getContext());
+        RadioButton rbC3 = new RadioButton(customLayout.getContext());
+        RadioButton rbC4 = new RadioButton(customLayout.getContext());
+        RadioButton rbC5 = new RadioButton(customLayout.getContext());
+        RadioButton rbC6 = new RadioButton(customLayout.getContext());
+        RadioButton rbC7 = new RadioButton(customLayout.getContext());
+        RadioButton rbC8 = new RadioButton(customLayout.getContext());
+        RadioButton rbC9 = new RadioButton(customLayout.getContext());
+        RadioButton rbC10 = new RadioButton(customLayout.getContext());
 
-                rbC1.setText(corsi[0].getTitleCourse());
-                rbC2.setText(corsi[1].getTitleCourse());
-                rbC3.setText(corsi[2].getTitleCourse());
-                rbC4.setText(corsi[3].getTitleCourse());
-                rbC5.setText(corsi[4].getTitleCourse());
-                rbC6.setText(corsi[5].getTitleCourse());
-                rbC7.setText(corsi[6].getTitleCourse());
-                rbC8.setText(corsi[7].getTitleCourse());
-                rbC9.setText(corsi[8].getTitleCourse());
-                rbC10.setText(corsi[9].getTitleCourse());
+        rbC1.setText(corsi[0].getTitleCourse());
+        rbC2.setText(corsi[1].getTitleCourse());
+        rbC3.setText(corsi[2].getTitleCourse());
+        rbC4.setText(corsi[3].getTitleCourse());
+        rbC5.setText(corsi[4].getTitleCourse());
+        rbC6.setText(corsi[5].getTitleCourse());
+        rbC7.setText(corsi[6].getTitleCourse());
+        rbC8.setText(corsi[7].getTitleCourse());
+        rbC9.setText(corsi[8].getTitleCourse());
+        rbC10.setText(corsi[9].getTitleCourse());
 
-                course.addView(rbC1);
-                course.addView(rbC2);
-                course.addView(rbC3);
-                course.addView(rbC4);
-                course.addView(rbC5);
-                course.addView(rbC6);
-                course.addView(rbC7);
-                course.addView(rbC8);
-                course.addView(rbC9);
-                course.addView(rbC10);
+        course.addView(rbC1);
+        course.addView(rbC2);
+        course.addView(rbC3);
+        course.addView(rbC4);
+        course.addView(rbC5);
+        course.addView(rbC6);
+        course.addView(rbC7);
+        course.addView(rbC8);
+        course.addView(rbC9);
+        course.addView(rbC10);
 
         builder.setPositiveButton("Fatto", new DialogInterface.OnClickListener() {
             @Override
@@ -293,23 +308,33 @@ public class LessonFragment extends AppCompatActivity {
                 int selectedId = course.getCheckedRadioButtonId();
                 //RadioButton rb = course.findViewById(selectedId-1);
 
-                if (selectedId-1 <= mCardPagerAdapter.getCount()) {
+                if (selectedId - 1 <= mCardPagerAdapter.getCount()) {
                     //Courses course = mCardPagerAdapter.getCardItemInPosition(selectedId-1);
-                    CardView cardView = mCardPagerAdapter.getView(selectedId-1);
-                    mCardPagerAdapter.destroyItem(mViewPager,selectedId-1,cardView);
+                    CardView cardView = mCardPagerAdapter.getView(selectedId - 1);
+                    mCardPagerAdapter.destroyItem(mViewPager, selectedId - 1, cardView);
                     //mCardPagerAdapter.getCardItemInPosition(selectedId-1);
-                } else{
-                        if(selectedId >= 11 && selectedId <= 20){selectedId = selectedId-10; }
-                        else if(selectedId >= 21 && selectedId <= 30){selectedId = selectedId-20; }
-                        else if(selectedId >= 31 && selectedId <= 40){ selectedId = selectedId-30; }
-                        else if(selectedId >= 41 && selectedId <= 50){ selectedId = selectedId-40; }
-                        else if(selectedId >= 51 && selectedId <= 60){ selectedId = selectedId-50; }
-                        else if(selectedId >= 61 && selectedId <= 70){ selectedId = selectedId-60; }
-                        else if(selectedId >= 71 && selectedId <= 80){ selectedId = selectedId-70; }
-                        else if(selectedId >= 81 && selectedId <= 90){ selectedId = selectedId-80; }
-                        else if(selectedId >= 91 && selectedId <= 100){ selectedId = selectedId-90; }
-                    CardView cardView = mCardPagerAdapter.getView(selectedId-1);
-                    mCardPagerAdapter.destroyItem(mViewPager,selectedId-1,cardView);
+                } else {
+                    if (selectedId >= 11 && selectedId <= 20) {
+                        selectedId = selectedId - 10;
+                    } else if (selectedId >= 21 && selectedId <= 30) {
+                        selectedId = selectedId - 20;
+                    } else if (selectedId >= 31 && selectedId <= 40) {
+                        selectedId = selectedId - 30;
+                    } else if (selectedId >= 41 && selectedId <= 50) {
+                        selectedId = selectedId - 40;
+                    } else if (selectedId >= 51 && selectedId <= 60) {
+                        selectedId = selectedId - 50;
+                    } else if (selectedId >= 61 && selectedId <= 70) {
+                        selectedId = selectedId - 60;
+                    } else if (selectedId >= 71 && selectedId <= 80) {
+                        selectedId = selectedId - 70;
+                    } else if (selectedId >= 81 && selectedId <= 90) {
+                        selectedId = selectedId - 80;
+                    } else if (selectedId >= 91 && selectedId <= 100) {
+                        selectedId = selectedId - 90;
+                    }
+                    CardView cardView = mCardPagerAdapter.getView(selectedId - 1);
+                    mCardPagerAdapter.destroyItem(mViewPager, selectedId - 1, cardView);
                 }
             }
         });
