@@ -13,9 +13,7 @@
         <action
             android:id="@+id/action_nav_home_general_to_nav_lessons"
             app:destination="@id/nav_lessons" />
-        <!--<action
-            android:id="@+id/action_nav_home_general_to_nav_exams"
-            app:destination="@id/nav_exams" />-->
+
     </fragment>
 
     <fragment
@@ -23,18 +21,28 @@
         android:name="com.example.android_esame.ui.home.LessonFragment"
         android:label="@string/menu_lessons"
         tools:layout="@layout/fragment_lessons" >
-        <!--<action
-            android:id="@+id/action_nav_lessons_to_examsDialogFragment"
-            app:destination="@id/examsDialogFragment" />-->
+        <action
+            android:id="@+id/action_LessonFragment_to_OrarioFragment"
+            app:destination="@id/OrarioFragment" />
     </fragment>
 
-    <!--
+
     <fragment
-        android:id="@+id/nav_exams"
-        android:name="com.example.android_esame.ui.home.ExamsFragment"
-        android:label="@string/menu_exams"
-        tools:layout="@layout/fragment_exams" />
-        -->
+        android:id="@+id/OrarioFragment"
+        android:name="com.example.android_esame.ui.home.OrarioFragment"
+        android:label="fragment_orario"
+        tools:layout="@layout/fragment_orario">
+        <argument
+            android:name="corso"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="prof"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.android_esame.LoginFragment"

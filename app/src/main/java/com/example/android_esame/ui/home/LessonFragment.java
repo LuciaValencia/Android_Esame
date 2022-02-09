@@ -121,10 +121,8 @@ public class LessonFragment extends AppCompatActivity {
                     cA.add(course);
                 }
 
-                //ArrayAdapter<Courses> coursesArrayAdapter=new ArrayAdapter<Courses>(LessonFragment.this, android.R.layout.simple_list_item_1,android.R.id.text1,cA);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(LessonFragment.this, android.R.layout.simple_list_item_1, android.R.id.text1, arr);
                 listView.setAdapter(adapter);
-                //listView.setAdapter(coursesArrayAdapter);
 
 
                 /**DA RIVEDERE TUTTO IL LISTENER*/
@@ -136,18 +134,17 @@ public class LessonFragment extends AppCompatActivity {
                         Courses[] coursesArray=lesson.getCourseArray();
 
                         String itemValue="";
-                            for(int k=0; k < coursesArray.length; k++){
-                                if(coursesArray[k].equals(item)){
-                                    itemValue = item.getTitleCourse() + " "+item.getCardProfessorsToString();
-                                  //itemValue = coursesArray[k].getTitleCourse() + " "+coursesArray[k].getCardProfessorsToString();
 
-                                }else{itemValue =item.getTitleCourse();}
+                        for (int k=0;k<coursesArray.length;k++){
+                            if(position==k){
+                                //itemValue=item.getTitleCourse();
+                                itemValue=coursesArray[k].getTitleCourse();
                             }
-
+                        }
 
                         position++;
 
-                        Toast.makeText(LessonFragment.this, "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                        Toast.makeText(LessonFragment.this, "Corso: " + itemValue, Toast.LENGTH_LONG)
                                 .show();
 
 

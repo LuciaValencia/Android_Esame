@@ -22,4 +22,6 @@
     <string name="button_exams_pren">Vedi piano carriera</string>
     <string name="text_lessons">Lezioni disponibili</string>
     <string name="text_exams">Appelli disponibili</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
