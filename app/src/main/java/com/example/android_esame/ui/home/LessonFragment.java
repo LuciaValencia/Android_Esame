@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -26,11 +29,13 @@ import com.example.android_esame.ui.CardSettings.CardPagerAdapter;
 import com.example.android_esame.ui.CardSettings.Courses;
 import com.example.android_esame.ui.CardSettings.ShadowTransformer;
 
+import java.util.ArrayList;
+
 public class LessonFragment extends AppCompatActivity {
 
     private UserViewModel model;
     private ViewPager mViewPager;
-    private CardPagerAdapter mCardPagerAdapter; //creo classe CardPagerAdapter e Courses
+    private CardPagerAdapter mCardPagerAdapter;
     private CardFragmentPagerAdapter mFragmentCardAdapter;
     private ShadowTransformer mFragmentCardShadowTransformer, mCardShadowTransformer;
     CalendarView calendarView;
@@ -67,8 +72,7 @@ public class LessonFragment extends AppCompatActivity {
 
         setContentView(R.layout.fragment_lessons);
 
-
-
+        /**-------------------* NON MODIFICARE DA QUI *------------------------*/
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         //card lezioni
@@ -78,19 +82,13 @@ public class LessonFragment extends AppCompatActivity {
         mCardPagerAdapter.addCardItem(corsi[0]);
         mCardPagerAdapter.addCardItem(corsi[1]);
         mCardPagerAdapter.addCardItem(corsi[2]);
-        //mCardPagerAdapter.addCardItem(c2);
-        //mCardPagerAdapter.addCardItem(c3);
 
-
-        /**-------------------* NON MODIFICARE DA QUI *------------------------*/
         //parametri per definire l'adapter per le card
-
         mFragmentCardAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(),
                 15);
 
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardPagerAdapter);
         mFragmentCardShadowTransformer = new ShadowTransformer(mViewPager, mFragmentCardAdapter);
-
 
         mViewPager.setAdapter(mCardPagerAdapter);
         mViewPager.setPageTransformer(false, mCardShadowTransformer);
@@ -103,35 +101,54 @@ public class LessonFragment extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+
                 TextView t = findViewById(R.id.titolo);
                 i1++;
                 t.setText("Lezioni del " + i2 + "/" + i1 + "/" + i);
 
-                TextView c = findViewById(R.id.contenuto);
+                //TextView c = findViewById(R.id.contenuto);
                 String textAdded = "";
+                ListView listView = findViewById(R.id.list);
+
+                ArrayList<String> arr = new ArrayList();
+
                 for(int n=0; n <mCardPagerAdapter.getCount();n++){
-                    textAdded+=corsi[n].getTitleCourse()+"\n";
-
+                    //arr.add("Item "+ corsi[n].getTitleCourse()+"\n"); //manca: corsi del "professor"
+                    textAdded=corsi[n].getTitleCourse()+"\n"; //manca: corsi del "professor"
+                    arr.add(textAdded+n);
                 }
-                //for (int n=0; n<corsi.length; n++){
-                    //Professor profDelCorso=corsi[n].getProfessors();
-                    //textAdded+=corsi[n].getTitleCourse()+"\n";
-                    //textAdded+=profDelCorso.readProfToString();
-                    //textAdded+=corsi[n].getCourseProfessors();
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, arr);
 
-                //}
+                listView.setAdapter(adapter);
 
-                c.setText(textAdded);
-                //Button btLez=new Button();
-                // btLez.setText("Prenotati");
+                /**TO DO : capire come risolvere la listview in base al file del prof*/
+
+                /** da rivedere in seguito: per ora non serve
+                 * listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        String itemValue = (String) listView.getItemAtPosition(position);
+                        Courses item= (Courses) listView.getItemAtPosition(position);
+                        itemValue=item.getTitleCourse();
+                        position++;
+                        Toast.makeText(LessonFragment.this,
+                                "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                                .show();
+                    }
+
+                });
+                 */
+
+                //.setText(textAdded);
+
             }
         });
     }
 
 
-    /**
-     * DEFINITIVO
-     */
+    /** DEFINITIVO */
     public void addLessons(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scegli il corso da aggiungere");
@@ -140,30 +157,30 @@ public class LessonFragment extends AppCompatActivity {
 
         builder.setView(customLayout);
 
-        RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
-        RadioButton rbC1 = new RadioButton(customLayout.getContext());
-        RadioButton rbC2 = new RadioButton(customLayout.getContext());
-        RadioButton rbC3 = new RadioButton(customLayout.getContext());
-        RadioButton rbC4 = new RadioButton(customLayout.getContext());
-        RadioButton rbC5 = new RadioButton(customLayout.getContext());
-        RadioButton rbC6 = new RadioButton(customLayout.getContext());
-        RadioButton rbC7 = new RadioButton(customLayout.getContext());
+                RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
+                RadioButton rbC1 = new RadioButton(customLayout.getContext());
+                RadioButton rbC2 = new RadioButton(customLayout.getContext());
+                RadioButton rbC3 = new RadioButton(customLayout.getContext());
+                RadioButton rbC4 = new RadioButton(customLayout.getContext());
+                RadioButton rbC5 = new RadioButton(customLayout.getContext());
+                RadioButton rbC6 = new RadioButton(customLayout.getContext());
+                RadioButton rbC7 = new RadioButton(customLayout.getContext());
 
-        rbC1.setText(corsi[3].getTitleCourse());
-        rbC2.setText(corsi[4].getTitleCourse());
-        rbC3.setText(corsi[5].getTitleCourse());
-        rbC4.setText(corsi[6].getTitleCourse());
-        rbC5.setText(corsi[7].getTitleCourse());
-        rbC6.setText(corsi[8].getTitleCourse());
-        rbC7.setText(corsi[9].getTitleCourse());
+                rbC1.setText(corsi[3].getTitleCourse());
+                rbC2.setText(corsi[4].getTitleCourse());
+                rbC3.setText(corsi[5].getTitleCourse());
+                rbC4.setText(corsi[6].getTitleCourse());
+                rbC5.setText(corsi[7].getTitleCourse());
+                rbC6.setText(corsi[8].getTitleCourse());
+                rbC7.setText(corsi[9].getTitleCourse());
 
-        course.addView(rbC1);
-        course.addView(rbC2);
-        course.addView(rbC3);
-        course.addView(rbC4);
-        course.addView(rbC5);
-        course.addView(rbC6);
-        course.addView(rbC7);
+                course.addView(rbC1);
+                course.addView(rbC2);
+                course.addView(rbC3);
+                course.addView(rbC4);
+                course.addView(rbC5);
+                course.addView(rbC6);
+                course.addView(rbC7);
 
         builder.setPositiveButton("Fatto", new DialogInterface.OnClickListener() {
             @Override
@@ -199,9 +216,7 @@ public class LessonFragment extends AppCompatActivity {
         dialog.show();
     }
 
-    /**
-     * DEFINITIVO
-     */
+    /** DEFINITIVO */
     // Do something with the data coming from the AlertDialog
     private void sendDialogDataToActivity(String course, Object professor) {
 
@@ -226,50 +241,47 @@ public class LessonFragment extends AppCompatActivity {
                 .show();
     }
 
-
+    /** DEFINITIVO */
     public void deleteLessons(View view) {
-        /**NON FUNZIONA*/
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scegli il corso da togliere");
 
         final View customLayout = getLayoutInflater().inflate(R.layout.dialogue_layout, null);
         builder.setView(customLayout);
 
-        RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
-        RadioButton rbC1 = new RadioButton(customLayout.getContext());
-        RadioButton rbC2 = new RadioButton(customLayout.getContext());
-        RadioButton rbC3 = new RadioButton(customLayout.getContext());
-        RadioButton rbC4 = new RadioButton(customLayout.getContext());
-        RadioButton rbC5 = new RadioButton(customLayout.getContext());
-        RadioButton rbC6 = new RadioButton(customLayout.getContext());
-        RadioButton rbC7 = new RadioButton(customLayout.getContext());
-        RadioButton rbC8 = new RadioButton(customLayout.getContext());
-        RadioButton rbC9 = new RadioButton(customLayout.getContext());
-        RadioButton rbC10 = new RadioButton(customLayout.getContext());
+                RadioGroup course = customLayout.findViewById(R.id.alertInputCourse);
+                RadioButton rbC1 = new RadioButton(customLayout.getContext());
+                RadioButton rbC2 = new RadioButton(customLayout.getContext());
+                RadioButton rbC3 = new RadioButton(customLayout.getContext());
+                RadioButton rbC4 = new RadioButton(customLayout.getContext());
+                RadioButton rbC5 = new RadioButton(customLayout.getContext());
+                RadioButton rbC6 = new RadioButton(customLayout.getContext());
+                RadioButton rbC7 = new RadioButton(customLayout.getContext());
+                RadioButton rbC8 = new RadioButton(customLayout.getContext());
+                RadioButton rbC9 = new RadioButton(customLayout.getContext());
+                RadioButton rbC10 = new RadioButton(customLayout.getContext());
 
-        rbC1.setText(corsi[0].getTitleCourse());
-        rbC2.setText(corsi[1].getTitleCourse());
-        rbC3.setText(corsi[2].getTitleCourse());
-        rbC4.setText(corsi[3].getTitleCourse());
-        rbC5.setText(corsi[4].getTitleCourse());
-        rbC6.setText(corsi[5].getTitleCourse());
-        rbC7.setText(corsi[6].getTitleCourse());
-        rbC8.setText(corsi[7].getTitleCourse());
-        rbC9.setText(corsi[8].getTitleCourse());
-        rbC10.setText(corsi[9].getTitleCourse());
+                rbC1.setText(corsi[0].getTitleCourse());
+                rbC2.setText(corsi[1].getTitleCourse());
+                rbC3.setText(corsi[2].getTitleCourse());
+                rbC4.setText(corsi[3].getTitleCourse());
+                rbC5.setText(corsi[4].getTitleCourse());
+                rbC6.setText(corsi[5].getTitleCourse());
+                rbC7.setText(corsi[6].getTitleCourse());
+                rbC8.setText(corsi[7].getTitleCourse());
+                rbC9.setText(corsi[8].getTitleCourse());
+                rbC10.setText(corsi[9].getTitleCourse());
 
-        course.addView(rbC1);
-        course.addView(rbC2);
-        course.addView(rbC3);
-        course.addView(rbC4);
-        course.addView(rbC5);
-        course.addView(rbC6);
-        course.addView(rbC7);
-        course.addView(rbC8);
-        course.addView(rbC9);
-        course.addView(rbC10);
-
+                course.addView(rbC1);
+                course.addView(rbC2);
+                course.addView(rbC3);
+                course.addView(rbC4);
+                course.addView(rbC5);
+                course.addView(rbC6);
+                course.addView(rbC7);
+                course.addView(rbC8);
+                course.addView(rbC9);
+                course.addView(rbC10);
 
         builder.setPositiveButton("Fatto", new DialogInterface.OnClickListener() {
             @Override
@@ -295,45 +307,23 @@ public class LessonFragment extends AppCompatActivity {
                     CardView cardView = mCardPagerAdapter.getView(selectedId-1);
                     mCardPagerAdapter.destroyItem(mViewPager,selectedId-1,cardView);
                 }
-                //Log.d("deleteLessons: ", String.valueOf(selectedId)); //mCardPagerAdapter.getCount() --> Size: 4
-
-
-
-                //return;
             }
         });
-
 
         // create and show the alert dialog
         AlertDialog dialog
                 = builder.create();
         dialog.show();
-
-        //int i = mCardPagerAdapter.getCount();
-//        Courses i= mCardPagerAdapter.getCardItemInPosition(0);
-//
-//        mCardPagerAdapter.destroyItem(mViewPager, 0,(Object) i);
-//
-        // TextView c = findViewById(R.id.contenuto);
-
-        // Courses pw = mCardPagerAdapter.getCardItemInPosition(0);
-//
-//
-//        //String titolo = mCardPagerAdapter.getCardItemInPosition(i).getTitleCourse();
-//       // String text = mCardPagerAdapter.getCardItemInPosition(i).getCardProf();
-
-        //String textAdded = "Cancellata  Lezione Goy?";
-        //String textAdded = "Il bottone funziona ma non ho attivato la funzione.";
-
-        //c.setText(textAdded);
-
     }
 }
+
+
+
+
+
 
 
 /**
  * TO DO
  * l'aggiunta delle card deve appartenere all'UserModel per gli utenti scritti NEIN
- * rimuovere le card quando si toglie la lezione
- * ù
  */
